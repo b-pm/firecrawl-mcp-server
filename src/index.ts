@@ -1013,7 +1013,10 @@ const searchToolBaseFields = {
   limit: z.number().int().min(1).max(100).optional(),
   tbs: z.string().optional(),
   filter: z.string().optional(),
+  lang: z.string().trim().min(1).optional().describe('Language hint for web/news search results, for example "en".'),
+  country: z.string().trim().min(1).optional().describe('Country hint for web/news search results, for example "US" or "DE".'),
   location: z.string().optional(),
+  timeout: z.number().int().positive().optional().describe('Search timeout in milliseconds.'),
   includeDomains: z.array(searchDomainSchema).optional().describe('Hostnames to restrict results to. Mutually exclusive with excludeDomains.'),
   excludeDomains: z.array(searchDomainSchema).optional().describe('Hostnames to leave out of results. Mutually exclusive with includeDomains.'),
   sources: z
