@@ -89,3 +89,35 @@ test('full firecrawl_search forwards domain filters as body fields without rewri
   });
   assert.equal(api.requests.length, before);
 });
+
+
+test('firecrawl_search exposes and forwards v2 locale and timeout fields', async (t) => {
+  const { api, client } = await startStdioWithApi(t);
+  const { tools } = await client.request('tools/list', {});
+  const search = tools.find((tool) => tool.name === 'firecrawl_search');
+  assert.ok(search, 'firecrawl_search missing');
+
+  for (const field of ['lang', 'country', 'timeout']) {
+    assert.ok(
+      search.inputSchema?.properties?.[field],
+      `firecrawl_search inputSchema is missing ${field}`
+    );
+  }
+
+  const result = await client.request('tools/call', {
+    name: 'firecrawl_search',
+    arguments: {
+      query: 'restaurants',
+      sources: ['web'],
+      lang: 'de',
+      country: 'DE',
+      timeout: 30000,
+    },
+  });
+
+  assert.notEqual(result.isError, true, JSON.stringify(result));
+  const body = api.requests.at(-1).body;
+  assert.equal(body.lang, 'de');
+  assert.equal(body.country, 'DE');
+  assert.equal(body.timeout, 30000);
+});
