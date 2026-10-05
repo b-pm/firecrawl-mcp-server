@@ -489,7 +489,6 @@ Search the web and optionally extract content from search results.
     "query": "remote work stipend policies at tech companies",
     "highlights": true,
     "limit": 5,
-    "lang": "en",
     "country": "us",
     "scrapeOptions": {
       "formats": ["markdown"],
