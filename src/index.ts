@@ -1014,6 +1014,19 @@ const searchToolBaseFields = {
   tbs: z.string().optional(),
   filter: z.string().optional(),
   location: z.string().optional(),
+  country: z
+    .string()
+    .optional()
+    .describe('ISO 3166-1 alpha-2 country code used to geo-target search results.'),
+  ignoreInvalidURLs: z
+    .boolean()
+    .optional()
+    .describe('Skip malformed or otherwise invalid result URLs when supported by the search backend.'),
+  timeout: z
+    .number()
+    .positive()
+    .optional()
+    .describe('Search request timeout in milliseconds.'),
   includeDomains: z.array(searchDomainSchema).optional().describe('Hostnames to restrict results to. Mutually exclusive with excludeDomains.'),
   excludeDomains: z.array(searchDomainSchema).optional().describe('Hostnames to leave out of results. Mutually exclusive with includeDomains.'),
   sources: z
