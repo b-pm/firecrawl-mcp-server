@@ -10,6 +10,7 @@
  */
 
 import { z } from 'zod';
+import { mcpJsonObjectOptional, mcpJsonObject } from './mcp-json-schemas';
 import type { ContentResult, FastMCP } from 'fastmcp';
 import { AGENT_HINTS_HEADERS, readAgentHints, withAgentHints } from './agent-hints';
 import { originHeaders, requestOrigin } from './origin';
@@ -247,7 +248,7 @@ In the simple form, a \`goal\` is required. If \`queries\` contains one or more 
 `,
     outputSchema: monitorOutputSchema,
     parameters: z.object({
-      body: z.record(z.string(), z.any()).optional(),
+      body: mcpJsonObjectOptional,
       page: z.string().optional(),
       pages: z.array(z.string()).optional(),
       queries: z.array(z.string()).optional(),
@@ -355,7 +356,7 @@ Returns the updated monitor.
     outputSchema: monitorOutputSchema,
     parameters: z.object({
       id: z.string(),
-      body: z.record(z.string(), z.any()),
+      body: mcpJsonObject,
     }),
     execute: async (
       args: unknown,
