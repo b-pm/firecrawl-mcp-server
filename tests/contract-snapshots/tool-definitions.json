@@ -553,7 +553,7 @@
       "additionalProperties": false
     }
   },
-  "firecrawl_crawl@4ca4a0262b5a": {
+  "firecrawl_crawl@aaeeadddbf66": {
     "annotations": {
       "title": "Firecrawl site crawl",
       "readOnlyHint": false,
@@ -633,6 +633,7 @@
           "type": "object",
           "properties": {
             "formats": {
+              "description": "Content formats to return. Defaults to markdown. Use `json` with jsonOptions, `query` with queryOptions, and `screenshot` with screenshotOptions.",
               "type": "array",
               "items": {
                 "type": "string",
@@ -653,12 +654,15 @@
               }
             },
             "jsonOptions": {
+              "description": "Structured extraction options used when formats includes `json`.",
               "type": "object",
               "properties": {
                 "prompt": {
+                  "description": "Instruction for structured extraction when formats includes `json`.",
                   "type": "string"
                 },
                 "schema": {
+                  "description": "JSON Schema object describing the structured output to extract.",
                   "type": "object",
                   "propertyNames": {
                     "type": "string"
@@ -669,13 +673,16 @@
               "additionalProperties": false
             },
             "queryOptions": {
+              "description": "Targeted-answer options used when formats includes `query`.",
               "type": "object",
               "properties": {
                 "prompt": {
+                  "description": "Question or extraction instruction used when formats includes `query`.",
                   "type": "string",
                   "maxLength": 10000
                 },
                 "mode": {
+                  "description": "Answer style: `directQuote` returns source text; `freeform` returns a synthesized answer.",
                   "default": "freeform",
                   "type": "string",
                   "enum": [
@@ -690,15 +697,19 @@
               "additionalProperties": false
             },
             "screenshotOptions": {
+              "description": "Screenshot options used when formats includes `screenshot`.",
               "type": "object",
               "properties": {
                 "fullPage": {
+                  "description": "Capture the full scrollable page instead of only the viewport.",
                   "type": "boolean"
                 },
                 "quality": {
+                  "description": "Screenshot image quality when supported by the selected format.",
                   "type": "number"
                 },
                 "viewport": {
+                  "description": "Viewport dimensions in CSS pixels, for example {width: 1440, height: 900}.",
                   "type": "object",
                   "properties": {
                     "width": {
@@ -718,6 +729,7 @@
               "additionalProperties": false
             },
             "parsers": {
+              "description": "Additional document parsers to enable; currently supports `pdf`.",
               "type": "array",
               "items": {
                 "type": "string",
@@ -727,9 +739,11 @@
               }
             },
             "pdfOptions": {
+              "description": "PDF parser options used when parsers includes `pdf`.",
               "type": "object",
               "properties": {
                 "maxPages": {
+                  "description": "Maximum PDF pages to parse, from 1 to 10000.",
                   "type": "integer",
                   "minimum": 1,
                   "maximum": 10000
@@ -738,27 +752,33 @@
               "additionalProperties": false
             },
             "onlyMainContent": {
+              "description": "Keep the primary page content and omit common navigation, footer, and boilerplate when possible.",
               "type": "boolean"
             },
             "redactPII": {
+              "description": "Redact personally identifiable information from returned content when supported.",
               "type": "boolean"
             },
             "includeTags": {
+              "description": "Only include content matching these HTML tags or CSS selectors.",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "excludeTags": {
+              "description": "Exclude content matching these HTML tags or CSS selectors.",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "waitFor": {
+              "description": "Milliseconds to wait after page load before extraction.",
               "type": "number"
             },
             "actions": {
+              "description": "Browser actions to run before extraction; unavailable in safe mode.",
               "type": "array",
               "items": {
                 "type": "object",
@@ -809,21 +829,27 @@
               }
             },
             "mobile": {
+              "description": "Use a mobile device profile for rendering.",
               "type": "boolean"
             },
             "skipTlsVerification": {
+              "description": "Skip TLS certificate verification for the target page.",
               "type": "boolean"
             },
             "removeBase64Images": {
+              "description": "Remove inline base64-encoded images from returned content.",
               "type": "boolean"
             },
             "location": {
+              "description": "Geographic and language settings for the scrape browser.",
               "type": "object",
               "properties": {
                 "country": {
+                  "description": "Two-letter country code used for geolocated browsing.",
                   "type": "string"
                 },
                 "languages": {
+                  "description": "Preferred browser languages, for example [`en-US`, `es`].",
                   "type": "array",
                   "items": {
                     "type": "string"
@@ -833,18 +859,23 @@
               "additionalProperties": false
             },
             "storeInCache": {
+              "description": "Allow this scrape result to be stored in Firecrawl cache.",
               "type": "boolean"
             },
             "zeroDataRetention": {
+              "description": "Request zero-data-retention handling when supported by the account and endpoint.",
               "type": "boolean"
             },
             "maxAge": {
+              "description": "Maximum cached-result age in milliseconds. Set 0 to force a live fetch.",
               "type": "number"
             },
             "lockdown": {
+              "description": "Restrict browsing behavior for a more isolated scrape when supported.",
               "type": "boolean"
             },
             "proxy": {
+              "description": "Proxy mode for the scrape. `auto` lets Firecrawl choose; `stealth` or `enhanced` may help on harder sites.",
               "type": "string",
               "enum": [
                 "basic",
@@ -854,12 +885,15 @@
               ]
             },
             "profile": {
+              "description": "Saved browser profile to load for this scrape.",
               "type": "object",
               "properties": {
                 "name": {
+                  "description": "Saved browser profile name to load.",
                   "type": "string"
                 },
                 "saveChanges": {
+                  "description": "Persist browser-profile changes made during this scrape.",
                   "type": "boolean"
                 }
               },
@@ -1003,7 +1037,7 @@
       "additionalProperties": false
     }
   },
-  "firecrawl_crawl@c4ede2eb32b6": {
+  "firecrawl_crawl@c93d83d3d664": {
     "annotations": {
       "title": "Firecrawl site crawl",
       "readOnlyHint": false,
@@ -1073,6 +1107,7 @@
           "type": "object",
           "properties": {
             "formats": {
+              "description": "Content formats to return. Defaults to markdown. Use `json` with jsonOptions, `query` with queryOptions, and `screenshot` with screenshotOptions.",
               "type": "array",
               "items": {
                 "type": "string",
@@ -1093,12 +1128,15 @@
               }
             },
             "jsonOptions": {
+              "description": "Structured extraction options used when formats includes `json`.",
               "type": "object",
               "properties": {
                 "prompt": {
+                  "description": "Instruction for structured extraction when formats includes `json`.",
                   "type": "string"
                 },
                 "schema": {
+                  "description": "JSON Schema object describing the structured output to extract.",
                   "type": "object",
                   "propertyNames": {
                     "type": "string"
@@ -1109,13 +1147,16 @@
               "additionalProperties": false
             },
             "queryOptions": {
+              "description": "Targeted-answer options used when formats includes `query`.",
               "type": "object",
               "properties": {
                 "prompt": {
+                  "description": "Question or extraction instruction used when formats includes `query`.",
                   "type": "string",
                   "maxLength": 10000
                 },
                 "mode": {
+                  "description": "Answer style: `directQuote` returns source text; `freeform` returns a synthesized answer.",
                   "default": "freeform",
                   "type": "string",
                   "enum": [
@@ -1130,15 +1171,19 @@
               "additionalProperties": false
             },
             "screenshotOptions": {
+              "description": "Screenshot options used when formats includes `screenshot`.",
               "type": "object",
               "properties": {
                 "fullPage": {
+                  "description": "Capture the full scrollable page instead of only the viewport.",
                   "type": "boolean"
                 },
                 "quality": {
+                  "description": "Screenshot image quality when supported by the selected format.",
                   "type": "number"
                 },
                 "viewport": {
+                  "description": "Viewport dimensions in CSS pixels, for example {width: 1440, height: 900}.",
                   "type": "object",
                   "properties": {
                     "width": {
@@ -1158,6 +1203,7 @@
               "additionalProperties": false
             },
             "parsers": {
+              "description": "Additional document parsers to enable; currently supports `pdf`.",
               "type": "array",
               "items": {
                 "type": "string",
@@ -1167,9 +1213,11 @@
               }
             },
             "pdfOptions": {
+              "description": "PDF parser options used when parsers includes `pdf`.",
               "type": "object",
               "properties": {
                 "maxPages": {
+                  "description": "Maximum PDF pages to parse, from 1 to 10000.",
                   "type": "integer",
                   "minimum": 1,
                   "maximum": 10000
@@ -1178,42 +1226,53 @@
               "additionalProperties": false
             },
             "onlyMainContent": {
+              "description": "Keep the primary page content and omit common navigation, footer, and boilerplate when possible.",
               "type": "boolean"
             },
             "redactPII": {
+              "description": "Redact personally identifiable information from returned content when supported.",
               "type": "boolean"
             },
             "includeTags": {
+              "description": "Only include content matching these HTML tags or CSS selectors.",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "excludeTags": {
+              "description": "Exclude content matching these HTML tags or CSS selectors.",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "waitFor": {
+              "description": "Milliseconds to wait after page load before extraction.",
               "type": "number"
             },
             "mobile": {
+              "description": "Use a mobile device profile for rendering.",
               "type": "boolean"
             },
             "skipTlsVerification": {
+              "description": "Skip TLS certificate verification for the target page.",
               "type": "boolean"
             },
             "removeBase64Images": {
+              "description": "Remove inline base64-encoded images from returned content.",
               "type": "boolean"
             },
             "location": {
+              "description": "Geographic and language settings for the scrape browser.",
               "type": "object",
               "properties": {
                 "country": {
+                  "description": "Two-letter country code used for geolocated browsing.",
                   "type": "string"
                 },
                 "languages": {
+                  "description": "Preferred browser languages, for example [`en-US`, `es`].",
                   "type": "array",
                   "items": {
                     "type": "string"
@@ -1223,18 +1282,23 @@
               "additionalProperties": false
             },
             "storeInCache": {
+              "description": "Allow this scrape result to be stored in Firecrawl cache.",
               "type": "boolean"
             },
             "zeroDataRetention": {
+              "description": "Request zero-data-retention handling when supported by the account and endpoint.",
               "type": "boolean"
             },
             "maxAge": {
+              "description": "Maximum cached-result age in milliseconds. Set 0 to force a live fetch.",
               "type": "number"
             },
             "lockdown": {
+              "description": "Restrict browsing behavior for a more isolated scrape when supported.",
               "type": "boolean"
             },
             "proxy": {
+              "description": "Proxy mode for the scrape. `auto` lets Firecrawl choose; `stealth` or `enhanced` may help on harder sites.",
               "type": "string",
               "enum": [
                 "basic",
@@ -1244,12 +1308,15 @@
               ]
             },
             "profile": {
+              "description": "Saved browser profile to load for this scrape.",
               "type": "object",
               "properties": {
                 "name": {
+                  "description": "Saved browser profile name to load.",
                   "type": "string"
                 },
                 "saveChanges": {
+                  "description": "Persist browser-profile changes made during this scrape.",
                   "type": "boolean"
                 }
               },
@@ -2448,7 +2515,7 @@
       "additionalProperties": false
     }
   },
-  "firecrawl_interact@5439a16752e2": {
+  "firecrawl_interact@533a6579da15": {
     "annotations": {
       "title": "Firecrawl interact",
       "readOnlyHint": false,
@@ -2494,6 +2561,7 @@
           "type": "object",
           "properties": {
             "formats": {
+              "description": "Content formats to return. Defaults to markdown. Use `json` with jsonOptions, `query` with queryOptions, and `screenshot` with screenshotOptions.",
               "type": "array",
               "items": {
                 "type": "string",
@@ -2514,12 +2582,15 @@
               }
             },
             "jsonOptions": {
+              "description": "Structured extraction options used when formats includes `json`.",
               "type": "object",
               "properties": {
                 "prompt": {
+                  "description": "Instruction for structured extraction when formats includes `json`.",
                   "type": "string"
                 },
                 "schema": {
+                  "description": "JSON Schema object describing the structured output to extract.",
                   "type": "object",
                   "propertyNames": {
                     "type": "string"
@@ -2530,13 +2601,16 @@
               "additionalProperties": false
             },
             "queryOptions": {
+              "description": "Targeted-answer options used when formats includes `query`.",
               "type": "object",
               "properties": {
                 "prompt": {
+                  "description": "Question or extraction instruction used when formats includes `query`.",
                   "type": "string",
                   "maxLength": 10000
                 },
                 "mode": {
+                  "description": "Answer style: `directQuote` returns source text; `freeform` returns a synthesized answer.",
                   "default": "freeform",
                   "type": "string",
                   "enum": [
@@ -2551,15 +2625,19 @@
               "additionalProperties": false
             },
             "screenshotOptions": {
+              "description": "Screenshot options used when formats includes `screenshot`.",
               "type": "object",
               "properties": {
                 "fullPage": {
+                  "description": "Capture the full scrollable page instead of only the viewport.",
                   "type": "boolean"
                 },
                 "quality": {
+                  "description": "Screenshot image quality when supported by the selected format.",
                   "type": "number"
                 },
                 "viewport": {
+                  "description": "Viewport dimensions in CSS pixels, for example {width: 1440, height: 900}.",
                   "type": "object",
                   "properties": {
                     "width": {
@@ -2579,6 +2657,7 @@
               "additionalProperties": false
             },
             "parsers": {
+              "description": "Additional document parsers to enable; currently supports `pdf`.",
               "type": "array",
               "items": {
                 "type": "string",
@@ -2588,9 +2667,11 @@
               }
             },
             "pdfOptions": {
+              "description": "PDF parser options used when parsers includes `pdf`.",
               "type": "object",
               "properties": {
                 "maxPages": {
+                  "description": "Maximum PDF pages to parse, from 1 to 10000.",
                   "type": "integer",
                   "minimum": 1,
                   "maximum": 10000
@@ -2599,27 +2680,33 @@
               "additionalProperties": false
             },
             "onlyMainContent": {
+              "description": "Keep the primary page content and omit common navigation, footer, and boilerplate when possible.",
               "type": "boolean"
             },
             "redactPII": {
+              "description": "Redact personally identifiable information from returned content when supported.",
               "type": "boolean"
             },
             "includeTags": {
+              "description": "Only include content matching these HTML tags or CSS selectors.",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "excludeTags": {
+              "description": "Exclude content matching these HTML tags or CSS selectors.",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "waitFor": {
+              "description": "Milliseconds to wait after page load before extraction.",
               "type": "number"
             },
             "actions": {
+              "description": "Browser actions to run before extraction; unavailable in safe mode.",
               "type": "array",
               "items": {
                 "type": "object",
@@ -2670,21 +2757,27 @@
               }
             },
             "mobile": {
+              "description": "Use a mobile device profile for rendering.",
               "type": "boolean"
             },
             "skipTlsVerification": {
+              "description": "Skip TLS certificate verification for the target page.",
               "type": "boolean"
             },
             "removeBase64Images": {
+              "description": "Remove inline base64-encoded images from returned content.",
               "type": "boolean"
             },
             "location": {
+              "description": "Geographic and language settings for the scrape browser.",
               "type": "object",
               "properties": {
                 "country": {
+                  "description": "Two-letter country code used for geolocated browsing.",
                   "type": "string"
                 },
                 "languages": {
+                  "description": "Preferred browser languages, for example [`en-US`, `es`].",
                   "type": "array",
                   "items": {
                     "type": "string"
@@ -2694,18 +2787,23 @@
               "additionalProperties": false
             },
             "storeInCache": {
+              "description": "Allow this scrape result to be stored in Firecrawl cache.",
               "type": "boolean"
             },
             "zeroDataRetention": {
+              "description": "Request zero-data-retention handling when supported by the account and endpoint.",
               "type": "boolean"
             },
             "maxAge": {
+              "description": "Maximum cached-result age in milliseconds. Set 0 to force a live fetch.",
               "type": "number"
             },
             "lockdown": {
+              "description": "Restrict browsing behavior for a more isolated scrape when supported.",
               "type": "boolean"
             },
             "proxy": {
+              "description": "Proxy mode for the scrape. `auto` lets Firecrawl choose; `stealth` or `enhanced` may help on harder sites.",
               "type": "string",
               "enum": [
                 "basic",
@@ -2715,12 +2813,15 @@
               ]
             },
             "profile": {
+              "description": "Saved browser profile to load for this scrape.",
               "type": "object",
               "properties": {
                 "name": {
+                  "description": "Saved browser profile name to load.",
                   "type": "string"
                 },
                 "saveChanges": {
+                  "description": "Persist browser-profile changes made during this scrape.",
                   "type": "boolean"
                 }
               },
@@ -2845,7 +2946,7 @@
       "additionalProperties": false
     }
   },
-  "firecrawl_interact@9b215cde7142": {
+  "firecrawl_interact@ee9e9ea17277": {
     "annotations": {
       "title": "Firecrawl interact",
       "readOnlyHint": false,
@@ -2891,6 +2992,7 @@
           "type": "object",
           "properties": {
             "formats": {
+              "description": "Content formats to return. Defaults to markdown. Use `json` with jsonOptions, `query` with queryOptions, and `screenshot` with screenshotOptions.",
               "type": "array",
               "items": {
                 "type": "string",
@@ -2911,12 +3013,15 @@
               }
             },
             "jsonOptions": {
+              "description": "Structured extraction options used when formats includes `json`.",
               "type": "object",
               "properties": {
                 "prompt": {
+                  "description": "Instruction for structured extraction when formats includes `json`.",
                   "type": "string"
                 },
                 "schema": {
+                  "description": "JSON Schema object describing the structured output to extract.",
                   "type": "object",
                   "propertyNames": {
                     "type": "string"
@@ -2927,13 +3032,16 @@
               "additionalProperties": false
             },
             "queryOptions": {
+              "description": "Targeted-answer options used when formats includes `query`.",
               "type": "object",
               "properties": {
                 "prompt": {
+                  "description": "Question or extraction instruction used when formats includes `query`.",
                   "type": "string",
                   "maxLength": 10000
                 },
                 "mode": {
+                  "description": "Answer style: `directQuote` returns source text; `freeform` returns a synthesized answer.",
                   "default": "freeform",
                   "type": "string",
                   "enum": [
@@ -2948,15 +3056,19 @@
               "additionalProperties": false
             },
             "screenshotOptions": {
+              "description": "Screenshot options used when formats includes `screenshot`.",
               "type": "object",
               "properties": {
                 "fullPage": {
+                  "description": "Capture the full scrollable page instead of only the viewport.",
                   "type": "boolean"
                 },
                 "quality": {
+                  "description": "Screenshot image quality when supported by the selected format.",
                   "type": "number"
                 },
                 "viewport": {
+                  "description": "Viewport dimensions in CSS pixels, for example {width: 1440, height: 900}.",
                   "type": "object",
                   "properties": {
                     "width": {
@@ -2976,6 +3088,7 @@
               "additionalProperties": false
             },
             "parsers": {
+              "description": "Additional document parsers to enable; currently supports `pdf`.",
               "type": "array",
               "items": {
                 "type": "string",
@@ -2985,9 +3098,11 @@
               }
             },
             "pdfOptions": {
+              "description": "PDF parser options used when parsers includes `pdf`.",
               "type": "object",
               "properties": {
                 "maxPages": {
+                  "description": "Maximum PDF pages to parse, from 1 to 10000.",
                   "type": "integer",
                   "minimum": 1,
                   "maximum": 10000
@@ -2996,42 +3111,53 @@
               "additionalProperties": false
             },
             "onlyMainContent": {
+              "description": "Keep the primary page content and omit common navigation, footer, and boilerplate when possible.",
               "type": "boolean"
             },
             "redactPII": {
+              "description": "Redact personally identifiable information from returned content when supported.",
               "type": "boolean"
             },
             "includeTags": {
+              "description": "Only include content matching these HTML tags or CSS selectors.",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "excludeTags": {
+              "description": "Exclude content matching these HTML tags or CSS selectors.",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "waitFor": {
+              "description": "Milliseconds to wait after page load before extraction.",
               "type": "number"
             },
             "mobile": {
+              "description": "Use a mobile device profile for rendering.",
               "type": "boolean"
             },
             "skipTlsVerification": {
+              "description": "Skip TLS certificate verification for the target page.",
               "type": "boolean"
             },
             "removeBase64Images": {
+              "description": "Remove inline base64-encoded images from returned content.",
               "type": "boolean"
             },
             "location": {
+              "description": "Geographic and language settings for the scrape browser.",
               "type": "object",
               "properties": {
                 "country": {
+                  "description": "Two-letter country code used for geolocated browsing.",
                   "type": "string"
                 },
                 "languages": {
+                  "description": "Preferred browser languages, for example [`en-US`, `es`].",
                   "type": "array",
                   "items": {
                     "type": "string"
@@ -3041,18 +3167,23 @@
               "additionalProperties": false
             },
             "storeInCache": {
+              "description": "Allow this scrape result to be stored in Firecrawl cache.",
               "type": "boolean"
             },
             "zeroDataRetention": {
+              "description": "Request zero-data-retention handling when supported by the account and endpoint.",
               "type": "boolean"
             },
             "maxAge": {
+              "description": "Maximum cached-result age in milliseconds. Set 0 to force a live fetch.",
               "type": "number"
             },
             "lockdown": {
+              "description": "Restrict browsing behavior for a more isolated scrape when supported.",
               "type": "boolean"
             },
             "proxy": {
+              "description": "Proxy mode for the scrape. `auto` lets Firecrawl choose; `stealth` or `enhanced` may help on harder sites.",
               "type": "string",
               "enum": [
                 "basic",
@@ -3062,12 +3193,15 @@
               ]
             },
             "profile": {
+              "description": "Saved browser profile to load for this scrape.",
               "type": "object",
               "properties": {
                 "name": {
+                  "description": "Saved browser profile name to load.",
                   "type": "string"
                 },
                 "saveChanges": {
+                  "description": "Persist browser-profile changes made during this scrape.",
                   "type": "boolean"
                 }
               },
@@ -4973,588 +5107,7 @@
       "additionalProperties": false
     }
   },
-  "firecrawl_scrape@5cda34cb58c3": {
-    "annotations": {
-      "title": "Firecrawl scrape",
-      "readOnlyHint": true,
-      "openWorldHint": true,
-      "destructiveHint": false
-    },
-    "title": "Firecrawl scrape",
-    "description": "\nScrape one URL and return its content, or execute catalogued Alexandria capabilities. URL mode returns markdown by default, or HTML, links, screenshots, branding data, a targeted answer, or JSON matching a supplied schema, plus page metadata. Firecrawl may serve recently indexed content; set `maxAge: 0` for a live fetch. A successful response does not by itself confirm the page is still current. A named browser profile loads saved session data without saving changes to it.\n\n`firecrawl_search` and `firecrawl_find_tools` can discover providers for the same fields across several pages; a matching Alexandria provider returns typed records in one call.\n\nAlexandria mode: `alexandria` selects catalogued capability execution and is mutually exclusive with `url`. Alexandria execution is billed per capability (pass includeCosts to firecrawl_find_tools to see prices if you need) and needs a team with Alexandria enabled.\n",
-    "inputSchema": {
-      "$schema": "http://json-schema.org/draft-07/schema#",
-      "type": "object",
-      "properties": {
-        "url": {
-          "type": "string",
-          "format": "uri"
-        },
-        "formats": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "markdown",
-              "html",
-              "rawHtml",
-              "screenshot",
-              "links",
-              "images",
-              "summary",
-              "changeTracking",
-              "branding",
-              "json",
-              "query",
-              "audio"
-            ]
-          }
-        },
-        "jsonOptions": {
-          "type": "object",
-          "properties": {
-            "prompt": {
-              "type": "string"
-            },
-            "schema": {
-              "type": "object",
-              "propertyNames": {
-                "type": "string"
-              },
-              "additionalProperties": false
-            }
-          },
-          "additionalProperties": false
-        },
-        "queryOptions": {
-          "type": "object",
-          "properties": {
-            "prompt": {
-              "type": "string",
-              "maxLength": 10000
-            },
-            "mode": {
-              "default": "freeform",
-              "type": "string",
-              "enum": [
-                "directQuote",
-                "freeform"
-              ]
-            }
-          },
-          "required": [
-            "prompt"
-          ],
-          "additionalProperties": false
-        },
-        "screenshotOptions": {
-          "type": "object",
-          "properties": {
-            "fullPage": {
-              "type": "boolean"
-            },
-            "quality": {
-              "type": "number"
-            },
-            "viewport": {
-              "type": "object",
-              "properties": {
-                "width": {
-                  "type": "number"
-                },
-                "height": {
-                  "type": "number"
-                }
-              },
-              "required": [
-                "width",
-                "height"
-              ],
-              "additionalProperties": false
-            }
-          },
-          "additionalProperties": false
-        },
-        "parsers": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "pdf"
-            ]
-          }
-        },
-        "pdfOptions": {
-          "type": "object",
-          "properties": {
-            "maxPages": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 10000
-            }
-          },
-          "additionalProperties": false
-        },
-        "onlyMainContent": {
-          "type": "boolean"
-        },
-        "redactPII": {
-          "type": "boolean"
-        },
-        "includeTags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "excludeTags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "waitFor": {
-          "type": "number"
-        },
-        "mobile": {
-          "type": "boolean"
-        },
-        "skipTlsVerification": {
-          "type": "boolean"
-        },
-        "removeBase64Images": {
-          "type": "boolean"
-        },
-        "location": {
-          "type": "object",
-          "properties": {
-            "country": {
-              "type": "string"
-            },
-            "languages": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          },
-          "additionalProperties": false
-        },
-        "storeInCache": {
-          "type": "boolean"
-        },
-        "zeroDataRetention": {
-          "type": "boolean"
-        },
-        "maxAge": {
-          "type": "number"
-        },
-        "lockdown": {
-          "type": "boolean"
-        },
-        "proxy": {
-          "type": "string",
-          "enum": [
-            "basic",
-            "stealth",
-            "enhanced",
-            "auto"
-          ]
-        },
-        "profile": {
-          "description": "Loads a saved browser profile without saving changes to it.",
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "name"
-          ],
-          "additionalProperties": false
-        },
-        "timeout": {
-          "description": "Execution timeout in milliseconds.",
-          "type": "integer",
-          "exclusiveMinimum": 0,
-          "maximum": 9007199254740991
-        },
-        "requestId": {
-          "description": "Idempotency key bound to one Alexandria execution payload. Generated when omitted and returned with the result.",
-          "type": "string",
-          "pattern": "^[A-Za-z0-9._:-]{1,128}$"
-        },
-        "alexandria": {
-          "description": "Catalogued Alexandria capability invocation, mutually exclusive with url. One {provider, capability, options} object or an array of 1-10, with contracts available through firecrawl_search or firecrawl_find_tools. Each call may include version to pin a published workflow; omitting it uses latest. Only requestId and timeout are supported alongside alexandria. The selected contract marks required inputs and any requiresOneOf groups (at least one member per group); it may include example.request/example.response and response.key (which may differ from records). Where pagination is declared, its fields govern paging with the same filters; catalogue next is separate from provider pagination. Returns per-capability results in data.alexandria with data, records, or an error with a code; individual capabilities can fail even when the outer response succeeds. Requires an API key on a team with Alexandria enabled. Some providers require accepted terms; blocked requests return the applicable requirements.",
-          "anyOf": [
-            {
-              "type": "object",
-              "properties": {
-                "provider": {
-                  "description": "Provider slug, e.g. \"fred\".",
-                  "type": "string",
-                  "minLength": 1
-                },
-                "capability": {
-                  "description": "Capability address as returned by search or discover, e.g. \"series/observations\".",
-                  "type": "string",
-                  "minLength": 1
-                },
-                "version": {
-                  "description": "Optional published workflow version. Omit to use the latest version.",
-                  "type": "string",
-                  "minLength": 1,
-                  "maxLength": 128
-                },
-                "options": {
-                  "description": "Capability options as declared by its contract.",
-                  "type": "object",
-                  "propertyNames": {
-                    "type": "string"
-                  },
-                  "additionalProperties": {}
-                }
-              },
-              "required": [
-                "provider",
-                "capability"
-              ]
-            },
-            {
-              "minItems": 1,
-              "maxItems": 10,
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "provider": {
-                    "description": "Provider slug, e.g. \"fred\".",
-                    "type": "string",
-                    "minLength": 1
-                  },
-                  "capability": {
-                    "description": "Capability address as returned by search or discover, e.g. \"series/observations\".",
-                    "type": "string",
-                    "minLength": 1
-                  },
-                  "version": {
-                    "description": "Optional published workflow version. Omit to use the latest version.",
-                    "type": "string",
-                    "minLength": 1,
-                    "maxLength": 128
-                  },
-                  "options": {
-                    "description": "Capability options as declared by its contract.",
-                    "type": "object",
-                    "propertyNames": {
-                      "type": "string"
-                    },
-                    "additionalProperties": {}
-                  }
-                },
-                "required": [
-                  "provider",
-                  "capability"
-                ]
-              }
-            }
-          ]
-        },
-        "toolDetail": {
-          "description": "URL mode only: domain discovery detail, summary by default; compact returns provider/capability/description, full includes contracts. Ignored with alexandria.",
-          "type": "string",
-          "enum": [
-            "compact",
-            "summary",
-            "full"
-          ]
-        },
-        "domainTools": {
-          "description": "URL mode only: include domain-matched Alexandria tools for the page in tools on the returned document. Ignored with alexandria.",
-          "type": "boolean"
-        }
-      },
-      "additionalProperties": false
-    },
-    "name": "firecrawl_scrape",
-    "outputSchema": {
-      "$schema": "http://json-schema.org/draft-07/schema#",
-      "description": "A scraped document, or the Alexandria execution envelope when `alexandria` was passed.",
-      "type": "object",
-      "properties": {
-        "markdown": {
-          "description": "Page content as markdown.",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "html": {
-          "description": "Processed HTML of the page.",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "rawHtml": {
-          "description": "Unprocessed HTML of the page.",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "summary": {
-          "description": "Summary of the page content.",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "links": {
-          "description": "Links found on the page."
-        },
-        "screenshot": {
-          "description": "Screenshot of the page."
-        },
-        "images": {
-          "description": "Images found on the page."
-        },
-        "audio": {
-          "description": "Audio extracted from the page."
-        },
-        "video": {
-          "description": "Video extracted from the page."
-        },
-        "answer": {
-          "description": "Targeted answer to the question that was asked of the page.",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "highlights": {
-          "description": "Highlighted passages from the page."
-        },
-        "pages": {
-          "description": "Physical PDF pages, when `parsers[].pages` is set."
-        },
-        "blocks": {
-          "description": "Typed PDF layout blocks, when `parsers[].blocks` is set."
-        },
-        "product": {
-          "description": "Product data extracted from the page."
-        },
-        "menu": {
-          "description": "Menu data extracted from the page."
-        },
-        "json": {
-          "description": "Structured data matching the requested JSON schema or prompt."
-        },
-        "attributes": {
-          "description": "Values collected by the requested attribute selectors."
-        },
-        "actions": {
-          "description": "Results of the browser actions that ran during the scrape."
-        },
-        "changeTracking": {
-          "description": "Change-tracking comparison against the previous scrape."
-        },
-        "branding": {
-          "description": "Branding data extracted from the page."
-        },
-        "metadata": {
-          "description": "Page metadata; authenticated responses can include `metadata.scrapeId` for scrape feedback."
-        },
-        "tools": {
-          "description": "Domain-matched Alexandria tools for the page, when `domainTools` is set."
-        },
-        "warning": {
-          "description": "Non-fatal warning about the result.",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "success": {
-          "description": "Whether the API call succeeded.",
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "error": {
-          "description": "Error message or error object when the call did not succeed."
-        },
-        "data": {
-          "description": "Alexandria mode: per-capability results in `data.alexandria`, each with `data`, `records`, or an `error`."
-        },
-        "requestId": {
-          "description": "Identifier of this Alexandria execution.",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "scrape_id": {
-          "description": "Identifier of the underlying scrape.",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "receipt": {
-          "description": "Billing receipt for the execution."
-        },
-        "creditsCost": {
-          "description": "Credits this call consumed.",
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "delivery": {
-          "description": "`retained` when the full result stayed server-side instead of being inlined.",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "responseBytes": {
-          "description": "Size of the full result in bytes.",
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "estimatedTokens": {
-          "description": "Estimated token cost of the full result.",
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "tokenEstimateMethod": {
-          "description": "How `estimatedTokens` was derived.",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "inlineTokenBudget": {
-          "description": "Token budget above which a result is retained rather than inlined.",
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "workspaceId": {
-          "description": "Workspace holding a retained result, for inspection through virtual Bash.",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "idleTtlSeconds": {
-          "description": "Seconds a retained workspace stays available while idle.",
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "message": {
-          "description": "Guidance that accompanies the result.",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "nextTool": {
-          "description": "A follow-up tool call (`{name, arguments}`) that continues or inspects this result."
-        },
-        "feedbackTool": {
-          "description": "Pointer to the feedback tool for reporting how this result served the task."
-        }
-      },
-      "additionalProperties": false
-    },
-    "_meta": {
-      "anthropic/alwaysLoad": true
-    }
-  },
-  "firecrawl_scrape@c67c47e0d8ef": {
+  "firecrawl_scrape@36e2eab4e971": {
     "annotations": {
       "title": "Firecrawl scrape",
       "readOnlyHint": true,
@@ -5568,10 +5121,12 @@
       "type": "object",
       "properties": {
         "url": {
+          "description": "Page URL to scrape in URL mode; mutually exclusive with alexandria.",
           "type": "string",
           "format": "uri"
         },
         "formats": {
+          "description": "Content formats to return. Defaults to markdown. Use `json` with jsonOptions, `query` with queryOptions, and `screenshot` with screenshotOptions.",
           "type": "array",
           "items": {
             "type": "string",
@@ -5592,12 +5147,15 @@
           }
         },
         "jsonOptions": {
+          "description": "Structured extraction options used when formats includes `json`.",
           "type": "object",
           "properties": {
             "prompt": {
+              "description": "Instruction for structured extraction when formats includes `json`.",
               "type": "string"
             },
             "schema": {
+              "description": "JSON Schema object describing the structured output to extract.",
               "type": "object",
               "propertyNames": {
                 "type": "string"
@@ -5608,13 +5166,16 @@
           "additionalProperties": false
         },
         "queryOptions": {
+          "description": "Targeted-answer options used when formats includes `query`.",
           "type": "object",
           "properties": {
             "prompt": {
+              "description": "Question or extraction instruction used when formats includes `query`.",
               "type": "string",
               "maxLength": 10000
             },
             "mode": {
+              "description": "Answer style: `directQuote` returns source text; `freeform` returns a synthesized answer.",
               "default": "freeform",
               "type": "string",
               "enum": [
@@ -5629,15 +5190,19 @@
           "additionalProperties": false
         },
         "screenshotOptions": {
+          "description": "Screenshot options used when formats includes `screenshot`.",
           "type": "object",
           "properties": {
             "fullPage": {
+              "description": "Capture the full scrollable page instead of only the viewport.",
               "type": "boolean"
             },
             "quality": {
+              "description": "Screenshot image quality when supported by the selected format.",
               "type": "number"
             },
             "viewport": {
+              "description": "Viewport dimensions in CSS pixels, for example {width: 1440, height: 900}.",
               "type": "object",
               "properties": {
                 "width": {
@@ -5657,6 +5222,7 @@
           "additionalProperties": false
         },
         "parsers": {
+          "description": "Additional document parsers to enable; currently supports `pdf`.",
           "type": "array",
           "items": {
             "type": "string",
@@ -5666,9 +5232,11 @@
           }
         },
         "pdfOptions": {
+          "description": "PDF parser options used when parsers includes `pdf`.",
           "type": "object",
           "properties": {
             "maxPages": {
+              "description": "Maximum PDF pages to parse, from 1 to 10000.",
               "type": "integer",
               "minimum": 1,
               "maximum": 10000
@@ -5677,42 +5245,53 @@
           "additionalProperties": false
         },
         "onlyMainContent": {
+          "description": "Keep the primary page content and omit common navigation, footer, and boilerplate when possible.",
           "type": "boolean"
         },
         "redactPII": {
+          "description": "Redact personally identifiable information from returned content when supported.",
           "type": "boolean"
         },
         "includeTags": {
+          "description": "Only include content matching these HTML tags or CSS selectors.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "excludeTags": {
+          "description": "Exclude content matching these HTML tags or CSS selectors.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "waitFor": {
+          "description": "Milliseconds to wait after page load before extraction.",
           "type": "number"
         },
         "mobile": {
+          "description": "Use a mobile device profile for rendering.",
           "type": "boolean"
         },
         "skipTlsVerification": {
+          "description": "Skip TLS certificate verification for the target page.",
           "type": "boolean"
         },
         "removeBase64Images": {
+          "description": "Remove inline base64-encoded images from returned content.",
           "type": "boolean"
         },
         "location": {
+          "description": "Geographic and language settings for the scrape browser.",
           "type": "object",
           "properties": {
             "country": {
+              "description": "Two-letter country code used for geolocated browsing.",
               "type": "string"
             },
             "languages": {
+              "description": "Preferred browser languages, for example [`en-US`, `es`].",
               "type": "array",
               "items": {
                 "type": "string"
@@ -5722,18 +5301,23 @@
           "additionalProperties": false
         },
         "storeInCache": {
+          "description": "Allow this scrape result to be stored in Firecrawl cache.",
           "type": "boolean"
         },
         "zeroDataRetention": {
+          "description": "Request zero-data-retention handling when supported by the account and endpoint.",
           "type": "boolean"
         },
         "maxAge": {
+          "description": "Maximum cached-result age in milliseconds. Set 0 to force a live fetch.",
           "type": "number"
         },
         "lockdown": {
+          "description": "Restrict browsing behavior for a more isolated scrape when supported.",
           "type": "boolean"
         },
         "proxy": {
+          "description": "Proxy mode for the scrape. `auto` lets Firecrawl choose; `stealth` or `enhanced` may help on harder sites.",
           "type": "string",
           "enum": [
             "basic",
@@ -6135,7 +5719,7 @@
       "anthropic/alwaysLoad": true
     }
   },
-  "firecrawl_scrape@fb6600db7229": {
+  "firecrawl_scrape@9b2a565c3214": {
     "annotations": {
       "title": "Firecrawl scrape",
       "readOnlyHint": false,
@@ -6149,10 +5733,12 @@
       "type": "object",
       "properties": {
         "url": {
+          "description": "Page URL to scrape in URL mode; mutually exclusive with alexandria.",
           "type": "string",
           "format": "uri"
         },
         "formats": {
+          "description": "Content formats to return. Defaults to markdown. Use `json` with jsonOptions, `query` with queryOptions, and `screenshot` with screenshotOptions.",
           "type": "array",
           "items": {
             "type": "string",
@@ -6173,12 +5759,15 @@
           }
         },
         "jsonOptions": {
+          "description": "Structured extraction options used when formats includes `json`.",
           "type": "object",
           "properties": {
             "prompt": {
+              "description": "Instruction for structured extraction when formats includes `json`.",
               "type": "string"
             },
             "schema": {
+              "description": "JSON Schema object describing the structured output to extract.",
               "type": "object",
               "propertyNames": {
                 "type": "string"
@@ -6189,13 +5778,16 @@
           "additionalProperties": false
         },
         "queryOptions": {
+          "description": "Targeted-answer options used when formats includes `query`.",
           "type": "object",
           "properties": {
             "prompt": {
+              "description": "Question or extraction instruction used when formats includes `query`.",
               "type": "string",
               "maxLength": 10000
             },
             "mode": {
+              "description": "Answer style: `directQuote` returns source text; `freeform` returns a synthesized answer.",
               "default": "freeform",
               "type": "string",
               "enum": [
@@ -6210,15 +5802,19 @@
           "additionalProperties": false
         },
         "screenshotOptions": {
+          "description": "Screenshot options used when formats includes `screenshot`.",
           "type": "object",
           "properties": {
             "fullPage": {
+              "description": "Capture the full scrollable page instead of only the viewport.",
               "type": "boolean"
             },
             "quality": {
+              "description": "Screenshot image quality when supported by the selected format.",
               "type": "number"
             },
             "viewport": {
+              "description": "Viewport dimensions in CSS pixels, for example {width: 1440, height: 900}.",
               "type": "object",
               "properties": {
                 "width": {
@@ -6238,6 +5834,7 @@
           "additionalProperties": false
         },
         "parsers": {
+          "description": "Additional document parsers to enable; currently supports `pdf`.",
           "type": "array",
           "items": {
             "type": "string",
@@ -6247,9 +5844,11 @@
           }
         },
         "pdfOptions": {
+          "description": "PDF parser options used when parsers includes `pdf`.",
           "type": "object",
           "properties": {
             "maxPages": {
+              "description": "Maximum PDF pages to parse, from 1 to 10000.",
               "type": "integer",
               "minimum": 1,
               "maximum": 10000
@@ -6258,27 +5857,33 @@
           "additionalProperties": false
         },
         "onlyMainContent": {
+          "description": "Keep the primary page content and omit common navigation, footer, and boilerplate when possible.",
           "type": "boolean"
         },
         "redactPII": {
+          "description": "Redact personally identifiable information from returned content when supported.",
           "type": "boolean"
         },
         "includeTags": {
+          "description": "Only include content matching these HTML tags or CSS selectors.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "excludeTags": {
+          "description": "Exclude content matching these HTML tags or CSS selectors.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "waitFor": {
+          "description": "Milliseconds to wait after page load before extraction.",
           "type": "number"
         },
         "actions": {
+          "description": "Browser actions to run before extraction; unavailable in safe mode.",
           "type": "array",
           "items": {
             "type": "object",
@@ -6329,21 +5934,27 @@
           }
         },
         "mobile": {
+          "description": "Use a mobile device profile for rendering.",
           "type": "boolean"
         },
         "skipTlsVerification": {
+          "description": "Skip TLS certificate verification for the target page.",
           "type": "boolean"
         },
         "removeBase64Images": {
+          "description": "Remove inline base64-encoded images from returned content.",
           "type": "boolean"
         },
         "location": {
+          "description": "Geographic and language settings for the scrape browser.",
           "type": "object",
           "properties": {
             "country": {
+              "description": "Two-letter country code used for geolocated browsing.",
               "type": "string"
             },
             "languages": {
+              "description": "Preferred browser languages, for example [`en-US`, `es`].",
               "type": "array",
               "items": {
                 "type": "string"
@@ -6353,18 +5964,23 @@
           "additionalProperties": false
         },
         "storeInCache": {
+          "description": "Allow this scrape result to be stored in Firecrawl cache.",
           "type": "boolean"
         },
         "zeroDataRetention": {
+          "description": "Request zero-data-retention handling when supported by the account and endpoint.",
           "type": "boolean"
         },
         "maxAge": {
+          "description": "Maximum cached-result age in milliseconds. Set 0 to force a live fetch.",
           "type": "number"
         },
         "lockdown": {
+          "description": "Restrict browsing behavior for a more isolated scrape when supported.",
           "type": "boolean"
         },
         "proxy": {
+          "description": "Proxy mode for the scrape. `auto` lets Firecrawl choose; `stealth` or `enhanced` may help on harder sites.",
           "type": "string",
           "enum": [
             "basic",
@@ -6374,13 +5990,628 @@
           ]
         },
         "profile": {
+          "description": "Saved browser profile to load for this scrape.",
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "Saved browser profile name to load.",
+              "type": "string"
+            },
+            "saveChanges": {
+              "description": "Persist browser-profile changes made during this scrape.",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "additionalProperties": false
+        },
+        "timeout": {
+          "description": "Execution timeout in milliseconds.",
+          "type": "integer",
+          "exclusiveMinimum": 0,
+          "maximum": 9007199254740991
+        },
+        "requestId": {
+          "description": "Idempotency key bound to one Alexandria execution payload. Generated when omitted and returned with the result.",
+          "type": "string",
+          "pattern": "^[A-Za-z0-9._:-]{1,128}$"
+        },
+        "alexandria": {
+          "description": "Catalogued Alexandria capability invocation, mutually exclusive with url. One {provider, capability, options} object or an array of 1-10, with contracts available through firecrawl_search or firecrawl_find_tools. Each call may include version to pin a published workflow; omitting it uses latest. Only requestId and timeout are supported alongside alexandria. The selected contract marks required inputs and any requiresOneOf groups (at least one member per group); it may include example.request/example.response and response.key (which may differ from records). Where pagination is declared, its fields govern paging with the same filters; catalogue next is separate from provider pagination. Returns per-capability results in data.alexandria with data, records, or an error with a code; individual capabilities can fail even when the outer response succeeds. Requires an API key on a team with Alexandria enabled. Some providers require accepted terms; blocked requests return the applicable requirements.",
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "provider": {
+                  "description": "Provider slug, e.g. \"fred\".",
+                  "type": "string",
+                  "minLength": 1
+                },
+                "capability": {
+                  "description": "Capability address as returned by search or discover, e.g. \"series/observations\".",
+                  "type": "string",
+                  "minLength": 1
+                },
+                "version": {
+                  "description": "Optional published workflow version. Omit to use the latest version.",
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "options": {
+                  "description": "Capability options as declared by its contract.",
+                  "type": "object",
+                  "propertyNames": {
+                    "type": "string"
+                  },
+                  "additionalProperties": {}
+                }
+              },
+              "required": [
+                "provider",
+                "capability"
+              ]
+            },
+            {
+              "minItems": 1,
+              "maxItems": 10,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "provider": {
+                    "description": "Provider slug, e.g. \"fred\".",
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "capability": {
+                    "description": "Capability address as returned by search or discover, e.g. \"series/observations\".",
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "version": {
+                    "description": "Optional published workflow version. Omit to use the latest version.",
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "options": {
+                    "description": "Capability options as declared by its contract.",
+                    "type": "object",
+                    "propertyNames": {
+                      "type": "string"
+                    },
+                    "additionalProperties": {}
+                  }
+                },
+                "required": [
+                  "provider",
+                  "capability"
+                ]
+              }
+            }
+          ]
+        },
+        "toolDetail": {
+          "description": "URL mode only: domain discovery detail, summary by default; compact returns provider/capability/description, full includes contracts. Ignored with alexandria.",
+          "type": "string",
+          "enum": [
+            "compact",
+            "summary",
+            "full"
+          ]
+        },
+        "domainTools": {
+          "description": "URL mode only: include domain-matched Alexandria tools for the page in tools on the returned document. Ignored with alexandria.",
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "name": "firecrawl_scrape",
+    "outputSchema": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "description": "A scraped document, or the Alexandria execution envelope when `alexandria` was passed.",
+      "type": "object",
+      "properties": {
+        "markdown": {
+          "description": "Page content as markdown.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "html": {
+          "description": "Processed HTML of the page.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rawHtml": {
+          "description": "Unprocessed HTML of the page.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "summary": {
+          "description": "Summary of the page content.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "links": {
+          "description": "Links found on the page."
+        },
+        "screenshot": {
+          "description": "Screenshot of the page."
+        },
+        "images": {
+          "description": "Images found on the page."
+        },
+        "audio": {
+          "description": "Audio extracted from the page."
+        },
+        "video": {
+          "description": "Video extracted from the page."
+        },
+        "answer": {
+          "description": "Targeted answer to the question that was asked of the page.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "highlights": {
+          "description": "Highlighted passages from the page."
+        },
+        "pages": {
+          "description": "Physical PDF pages, when `parsers[].pages` is set."
+        },
+        "blocks": {
+          "description": "Typed PDF layout blocks, when `parsers[].blocks` is set."
+        },
+        "product": {
+          "description": "Product data extracted from the page."
+        },
+        "menu": {
+          "description": "Menu data extracted from the page."
+        },
+        "json": {
+          "description": "Structured data matching the requested JSON schema or prompt."
+        },
+        "attributes": {
+          "description": "Values collected by the requested attribute selectors."
+        },
+        "actions": {
+          "description": "Results of the browser actions that ran during the scrape."
+        },
+        "changeTracking": {
+          "description": "Change-tracking comparison against the previous scrape."
+        },
+        "branding": {
+          "description": "Branding data extracted from the page."
+        },
+        "metadata": {
+          "description": "Page metadata; authenticated responses can include `metadata.scrapeId` for scrape feedback."
+        },
+        "tools": {
+          "description": "Domain-matched Alexandria tools for the page, when `domainTools` is set."
+        },
+        "warning": {
+          "description": "Non-fatal warning about the result.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "success": {
+          "description": "Whether the API call succeeded.",
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "error": {
+          "description": "Error message or error object when the call did not succeed."
+        },
+        "data": {
+          "description": "Alexandria mode: per-capability results in `data.alexandria`, each with `data`, `records`, or an `error`."
+        },
+        "requestId": {
+          "description": "Identifier of this Alexandria execution.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "scrape_id": {
+          "description": "Identifier of the underlying scrape.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "receipt": {
+          "description": "Billing receipt for the execution."
+        },
+        "creditsCost": {
+          "description": "Credits this call consumed.",
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "delivery": {
+          "description": "`retained` when the full result stayed server-side instead of being inlined.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "responseBytes": {
+          "description": "Size of the full result in bytes.",
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "estimatedTokens": {
+          "description": "Estimated token cost of the full result.",
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "tokenEstimateMethod": {
+          "description": "How `estimatedTokens` was derived.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "inlineTokenBudget": {
+          "description": "Token budget above which a result is retained rather than inlined.",
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "workspaceId": {
+          "description": "Workspace holding a retained result, for inspection through virtual Bash.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "idleTtlSeconds": {
+          "description": "Seconds a retained workspace stays available while idle.",
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "message": {
+          "description": "Guidance that accompanies the result.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "nextTool": {
+          "description": "A follow-up tool call (`{name, arguments}`) that continues or inspects this result."
+        },
+        "feedbackTool": {
+          "description": "Pointer to the feedback tool for reporting how this result served the task."
+        }
+      },
+      "additionalProperties": false
+    },
+    "_meta": {
+      "anthropic/alwaysLoad": true
+    }
+  },
+  "firecrawl_scrape@d08dc1136356": {
+    "annotations": {
+      "title": "Firecrawl scrape",
+      "readOnlyHint": true,
+      "openWorldHint": true,
+      "destructiveHint": false
+    },
+    "title": "Firecrawl scrape",
+    "description": "\nScrape one URL and return its content, or execute catalogued Alexandria capabilities. URL mode returns markdown by default, or HTML, links, screenshots, branding data, a targeted answer, or JSON matching a supplied schema, plus page metadata. Firecrawl may serve recently indexed content; set `maxAge: 0` for a live fetch. A successful response does not by itself confirm the page is still current. A named browser profile loads saved session data without saving changes to it.\n\n`firecrawl_search` and `firecrawl_find_tools` can discover providers for the same fields across several pages; a matching Alexandria provider returns typed records in one call.\n\nAlexandria mode: `alexandria` selects catalogued capability execution and is mutually exclusive with `url`. Alexandria execution is billed per capability (pass includeCosts to firecrawl_find_tools to see prices if you need) and needs a team with Alexandria enabled.\n",
+    "inputSchema": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "type": "object",
+      "properties": {
+        "url": {
+          "description": "Page URL to scrape in URL mode; mutually exclusive with alexandria.",
+          "type": "string",
+          "format": "uri"
+        },
+        "formats": {
+          "description": "Content formats to return. Defaults to markdown. Use `json` with jsonOptions, `query` with queryOptions, and `screenshot` with screenshotOptions.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "markdown",
+              "html",
+              "rawHtml",
+              "screenshot",
+              "links",
+              "images",
+              "summary",
+              "changeTracking",
+              "branding",
+              "json",
+              "query",
+              "audio"
+            ]
+          }
+        },
+        "jsonOptions": {
+          "description": "Structured extraction options used when formats includes `json`.",
+          "type": "object",
+          "properties": {
+            "prompt": {
+              "description": "Instruction for structured extraction when formats includes `json`.",
+              "type": "string"
+            },
+            "schema": {
+              "description": "JSON Schema object describing the structured output to extract.",
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "queryOptions": {
+          "description": "Targeted-answer options used when formats includes `query`.",
+          "type": "object",
+          "properties": {
+            "prompt": {
+              "description": "Question or extraction instruction used when formats includes `query`.",
+              "type": "string",
+              "maxLength": 10000
+            },
+            "mode": {
+              "description": "Answer style: `directQuote` returns source text; `freeform` returns a synthesized answer.",
+              "default": "freeform",
+              "type": "string",
+              "enum": [
+                "directQuote",
+                "freeform"
+              ]
+            }
+          },
+          "required": [
+            "prompt"
+          ],
+          "additionalProperties": false
+        },
+        "screenshotOptions": {
+          "description": "Screenshot options used when formats includes `screenshot`.",
+          "type": "object",
+          "properties": {
+            "fullPage": {
+              "description": "Capture the full scrollable page instead of only the viewport.",
+              "type": "boolean"
+            },
+            "quality": {
+              "description": "Screenshot image quality when supported by the selected format.",
+              "type": "number"
+            },
+            "viewport": {
+              "description": "Viewport dimensions in CSS pixels, for example {width: 1440, height: 900}.",
+              "type": "object",
+              "properties": {
+                "width": {
+                  "type": "number"
+                },
+                "height": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "width",
+                "height"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "parsers": {
+          "description": "Additional document parsers to enable; currently supports `pdf`.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "pdf"
+            ]
+          }
+        },
+        "pdfOptions": {
+          "description": "PDF parser options used when parsers includes `pdf`.",
+          "type": "object",
+          "properties": {
+            "maxPages": {
+              "description": "Maximum PDF pages to parse, from 1 to 10000.",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000
+            }
+          },
+          "additionalProperties": false
+        },
+        "onlyMainContent": {
+          "description": "Keep the primary page content and omit common navigation, footer, and boilerplate when possible.",
+          "type": "boolean"
+        },
+        "redactPII": {
+          "description": "Redact personally identifiable information from returned content when supported.",
+          "type": "boolean"
+        },
+        "includeTags": {
+          "description": "Only include content matching these HTML tags or CSS selectors.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludeTags": {
+          "description": "Exclude content matching these HTML tags or CSS selectors.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "waitFor": {
+          "description": "Milliseconds to wait after page load before extraction.",
+          "type": "number"
+        },
+        "mobile": {
+          "description": "Use a mobile device profile for rendering.",
+          "type": "boolean"
+        },
+        "skipTlsVerification": {
+          "description": "Skip TLS certificate verification for the target page.",
+          "type": "boolean"
+        },
+        "removeBase64Images": {
+          "description": "Remove inline base64-encoded images from returned content.",
+          "type": "boolean"
+        },
+        "location": {
+          "description": "Geographic and language settings for the scrape browser.",
+          "type": "object",
+          "properties": {
+            "country": {
+              "description": "Two-letter country code used for geolocated browsing.",
+              "type": "string"
+            },
+            "languages": {
+              "description": "Preferred browser languages, for example [`en-US`, `es`].",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "storeInCache": {
+          "description": "Allow this scrape result to be stored in Firecrawl cache.",
+          "type": "boolean"
+        },
+        "zeroDataRetention": {
+          "description": "Request zero-data-retention handling when supported by the account and endpoint.",
+          "type": "boolean"
+        },
+        "maxAge": {
+          "description": "Maximum cached-result age in milliseconds. Set 0 to force a live fetch.",
+          "type": "number"
+        },
+        "lockdown": {
+          "description": "Restrict browsing behavior for a more isolated scrape when supported.",
+          "type": "boolean"
+        },
+        "proxy": {
+          "description": "Proxy mode for the scrape. `auto` lets Firecrawl choose; `stealth` or `enhanced` may help on harder sites.",
+          "type": "string",
+          "enum": [
+            "basic",
+            "stealth",
+            "enhanced",
+            "auto"
+          ]
+        },
+        "profile": {
+          "description": "Loads a saved browser profile without saving changes to it.",
           "type": "object",
           "properties": {
             "name": {
               "type": "string"
-            },
-            "saveChanges": {
-              "type": "boolean"
             }
           },
           "required": [
@@ -7017,7 +7248,7 @@
       "additionalProperties": false
     }
   },
-  "firecrawl_search@62659ad45558": {
+  "firecrawl_search@384d4d8e35ce": {
     "annotations": {
       "title": "Firecrawl web search",
       "readOnlyHint": true,
@@ -7053,17 +7284,21 @@
           "type": "boolean"
         },
         "limit": {
+          "description": "Maximum number of ranked results to return, from 1 to 100.",
           "type": "integer",
           "minimum": 1,
           "maximum": 100
         },
         "tbs": {
+          "description": "Search time/result filter using Firecrawl search syntax, for example qdr:d for the past day.",
           "type": "string"
         },
         "filter": {
+          "description": "Additional search filter expression supported by the Firecrawl search API.",
           "type": "string"
         },
         "location": {
+          "description": "Geographic search location, such as a city, region, or country name.",
           "type": "string"
         },
         "includeDomains": {
@@ -7137,6 +7372,7 @@
           }
         },
         "enterprise": {
+          "description": "Enterprise privacy/search modes. Use `zdr` for zero-data-retention routing or `anon` for anonymous enterprise search when enabled.",
           "type": "array",
           "items": {
             "type": "string",
@@ -7152,6 +7388,7 @@
           "type": "object",
           "properties": {
             "formats": {
+              "description": "Content formats to return. Defaults to markdown. Use `json` with jsonOptions, `query` with queryOptions, and `screenshot` with screenshotOptions.",
               "type": "array",
               "items": {
                 "type": "string",
@@ -7172,12 +7409,15 @@
               }
             },
             "jsonOptions": {
+              "description": "Structured extraction options used when formats includes `json`.",
               "type": "object",
               "properties": {
                 "prompt": {
+                  "description": "Instruction for structured extraction when formats includes `json`.",
                   "type": "string"
                 },
                 "schema": {
+                  "description": "JSON Schema object describing the structured output to extract.",
                   "type": "object",
                   "propertyNames": {
                     "type": "string"
@@ -7188,13 +7428,16 @@
               "additionalProperties": false
             },
             "queryOptions": {
+              "description": "Targeted-answer options used when formats includes `query`.",
               "type": "object",
               "properties": {
                 "prompt": {
+                  "description": "Question or extraction instruction used when formats includes `query`.",
                   "type": "string",
                   "maxLength": 10000
                 },
                 "mode": {
+                  "description": "Answer style: `directQuote` returns source text; `freeform` returns a synthesized answer.",
                   "default": "freeform",
                   "type": "string",
                   "enum": [
@@ -7209,15 +7452,19 @@
               "additionalProperties": false
             },
             "screenshotOptions": {
+              "description": "Screenshot options used when formats includes `screenshot`.",
               "type": "object",
               "properties": {
                 "fullPage": {
+                  "description": "Capture the full scrollable page instead of only the viewport.",
                   "type": "boolean"
                 },
                 "quality": {
+                  "description": "Screenshot image quality when supported by the selected format.",
                   "type": "number"
                 },
                 "viewport": {
+                  "description": "Viewport dimensions in CSS pixels, for example {width: 1440, height: 900}.",
                   "type": "object",
                   "properties": {
                     "width": {
@@ -7237,6 +7484,7 @@
               "additionalProperties": false
             },
             "parsers": {
+              "description": "Additional document parsers to enable; currently supports `pdf`.",
               "type": "array",
               "items": {
                 "type": "string",
@@ -7246,9 +7494,11 @@
               }
             },
             "pdfOptions": {
+              "description": "PDF parser options used when parsers includes `pdf`.",
               "type": "object",
               "properties": {
                 "maxPages": {
+                  "description": "Maximum PDF pages to parse, from 1 to 10000.",
                   "type": "integer",
                   "minimum": 1,
                   "maximum": 10000
@@ -7257,27 +7507,33 @@
               "additionalProperties": false
             },
             "onlyMainContent": {
+              "description": "Keep the primary page content and omit common navigation, footer, and boilerplate when possible.",
               "type": "boolean"
             },
             "redactPII": {
+              "description": "Redact personally identifiable information from returned content when supported.",
               "type": "boolean"
             },
             "includeTags": {
+              "description": "Only include content matching these HTML tags or CSS selectors.",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "excludeTags": {
+              "description": "Exclude content matching these HTML tags or CSS selectors.",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "waitFor": {
+              "description": "Milliseconds to wait after page load before extraction.",
               "type": "number"
             },
             "actions": {
+              "description": "Browser actions to run before extraction; unavailable in safe mode.",
               "type": "array",
               "items": {
                 "type": "object",
@@ -7328,21 +7584,27 @@
               }
             },
             "mobile": {
+              "description": "Use a mobile device profile for rendering.",
               "type": "boolean"
             },
             "skipTlsVerification": {
+              "description": "Skip TLS certificate verification for the target page.",
               "type": "boolean"
             },
             "removeBase64Images": {
+              "description": "Remove inline base64-encoded images from returned content.",
               "type": "boolean"
             },
             "location": {
+              "description": "Geographic and language settings for the scrape browser.",
               "type": "object",
               "properties": {
                 "country": {
+                  "description": "Two-letter country code used for geolocated browsing.",
                   "type": "string"
                 },
                 "languages": {
+                  "description": "Preferred browser languages, for example [`en-US`, `es`].",
                   "type": "array",
                   "items": {
                     "type": "string"
@@ -7352,18 +7614,23 @@
               "additionalProperties": false
             },
             "storeInCache": {
+              "description": "Allow this scrape result to be stored in Firecrawl cache.",
               "type": "boolean"
             },
             "zeroDataRetention": {
+              "description": "Request zero-data-retention handling when supported by the account and endpoint.",
               "type": "boolean"
             },
             "maxAge": {
+              "description": "Maximum cached-result age in milliseconds. Set 0 to force a live fetch.",
               "type": "number"
             },
             "lockdown": {
+              "description": "Restrict browsing behavior for a more isolated scrape when supported.",
               "type": "boolean"
             },
             "proxy": {
+              "description": "Proxy mode for the scrape. `auto` lets Firecrawl choose; `stealth` or `enhanced` may help on harder sites.",
               "type": "string",
               "enum": [
                 "basic",
@@ -7373,12 +7640,15 @@
               ]
             },
             "profile": {
+              "description": "Saved browser profile to load for this scrape.",
               "type": "object",
               "properties": {
                 "name": {
+                  "description": "Saved browser profile name to load.",
                   "type": "string"
                 },
                 "saveChanges": {
+                  "description": "Persist browser-profile changes made during this scrape.",
                   "type": "boolean"
                 }
               },
@@ -7468,7 +7738,7 @@
       "anthropic/alwaysLoad": true
     }
   },
-  "firecrawl_search@90ecc2bb70b0": {
+  "firecrawl_search@da909665b2ec": {
     "annotations": {
       "title": "Firecrawl web search",
       "readOnlyHint": true,
@@ -7504,17 +7774,21 @@
           "type": "boolean"
         },
         "limit": {
+          "description": "Maximum number of ranked results to return, from 1 to 100.",
           "type": "integer",
           "minimum": 1,
           "maximum": 100
         },
         "tbs": {
+          "description": "Search time/result filter using Firecrawl search syntax, for example qdr:d for the past day.",
           "type": "string"
         },
         "filter": {
+          "description": "Additional search filter expression supported by the Firecrawl search API.",
           "type": "string"
         },
         "location": {
+          "description": "Geographic search location, such as a city, region, or country name.",
           "type": "string"
         },
         "includeDomains": {
@@ -7588,6 +7862,7 @@
           }
         },
         "enterprise": {
+          "description": "Enterprise privacy/search modes. Use `zdr` for zero-data-retention routing or `anon` for anonymous enterprise search when enabled.",
           "type": "array",
           "items": {
             "type": "string",
@@ -7603,6 +7878,7 @@
           "type": "object",
           "properties": {
             "formats": {
+              "description": "Content formats to return. Defaults to markdown. Use `json` with jsonOptions, `query` with queryOptions, and `screenshot` with screenshotOptions.",
               "type": "array",
               "items": {
                 "type": "string",
@@ -7623,12 +7899,15 @@
               }
             },
             "jsonOptions": {
+              "description": "Structured extraction options used when formats includes `json`.",
               "type": "object",
               "properties": {
                 "prompt": {
+                  "description": "Instruction for structured extraction when formats includes `json`.",
                   "type": "string"
                 },
                 "schema": {
+                  "description": "JSON Schema object describing the structured output to extract.",
                   "type": "object",
                   "propertyNames": {
                     "type": "string"
@@ -7639,13 +7918,16 @@
               "additionalProperties": false
             },
             "queryOptions": {
+              "description": "Targeted-answer options used when formats includes `query`.",
               "type": "object",
               "properties": {
                 "prompt": {
+                  "description": "Question or extraction instruction used when formats includes `query`.",
                   "type": "string",
                   "maxLength": 10000
                 },
                 "mode": {
+                  "description": "Answer style: `directQuote` returns source text; `freeform` returns a synthesized answer.",
                   "default": "freeform",
                   "type": "string",
                   "enum": [
@@ -7660,15 +7942,19 @@
               "additionalProperties": false
             },
             "screenshotOptions": {
+              "description": "Screenshot options used when formats includes `screenshot`.",
               "type": "object",
               "properties": {
                 "fullPage": {
+                  "description": "Capture the full scrollable page instead of only the viewport.",
                   "type": "boolean"
                 },
                 "quality": {
+                  "description": "Screenshot image quality when supported by the selected format.",
                   "type": "number"
                 },
                 "viewport": {
+                  "description": "Viewport dimensions in CSS pixels, for example {width: 1440, height: 900}.",
                   "type": "object",
                   "properties": {
                     "width": {
@@ -7688,6 +7974,7 @@
               "additionalProperties": false
             },
             "parsers": {
+              "description": "Additional document parsers to enable; currently supports `pdf`.",
               "type": "array",
               "items": {
                 "type": "string",
@@ -7697,9 +7984,11 @@
               }
             },
             "pdfOptions": {
+              "description": "PDF parser options used when parsers includes `pdf`.",
               "type": "object",
               "properties": {
                 "maxPages": {
+                  "description": "Maximum PDF pages to parse, from 1 to 10000.",
                   "type": "integer",
                   "minimum": 1,
                   "maximum": 10000
@@ -7708,42 +7997,53 @@
               "additionalProperties": false
             },
             "onlyMainContent": {
+              "description": "Keep the primary page content and omit common navigation, footer, and boilerplate when possible.",
               "type": "boolean"
             },
             "redactPII": {
+              "description": "Redact personally identifiable information from returned content when supported.",
               "type": "boolean"
             },
             "includeTags": {
+              "description": "Only include content matching these HTML tags or CSS selectors.",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "excludeTags": {
+              "description": "Exclude content matching these HTML tags or CSS selectors.",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "waitFor": {
+              "description": "Milliseconds to wait after page load before extraction.",
               "type": "number"
             },
             "mobile": {
+              "description": "Use a mobile device profile for rendering.",
               "type": "boolean"
             },
             "skipTlsVerification": {
+              "description": "Skip TLS certificate verification for the target page.",
               "type": "boolean"
             },
             "removeBase64Images": {
+              "description": "Remove inline base64-encoded images from returned content.",
               "type": "boolean"
             },
             "location": {
+              "description": "Geographic and language settings for the scrape browser.",
               "type": "object",
               "properties": {
                 "country": {
+                  "description": "Two-letter country code used for geolocated browsing.",
                   "type": "string"
                 },
                 "languages": {
+                  "description": "Preferred browser languages, for example [`en-US`, `es`].",
                   "type": "array",
                   "items": {
                     "type": "string"
@@ -7753,18 +8053,23 @@
               "additionalProperties": false
             },
             "storeInCache": {
+              "description": "Allow this scrape result to be stored in Firecrawl cache.",
               "type": "boolean"
             },
             "zeroDataRetention": {
+              "description": "Request zero-data-retention handling when supported by the account and endpoint.",
               "type": "boolean"
             },
             "maxAge": {
+              "description": "Maximum cached-result age in milliseconds. Set 0 to force a live fetch.",
               "type": "number"
             },
             "lockdown": {
+              "description": "Restrict browsing behavior for a more isolated scrape when supported.",
               "type": "boolean"
             },
             "proxy": {
+              "description": "Proxy mode for the scrape. `auto` lets Firecrawl choose; `stealth` or `enhanced` may help on harder sites.",
               "type": "string",
               "enum": [
                 "basic",
@@ -7867,7 +8172,7 @@
       "anthropic/alwaysLoad": true
     }
   },
-  "firecrawl_search@96903afee503": {
+  "firecrawl_search@f15bc9f9bfe7": {
     "annotations": {
       "title": "Firecrawl web search",
       "readOnlyHint": true,
@@ -7903,17 +8208,21 @@
           "type": "boolean"
         },
         "limit": {
+          "description": "Maximum number of ranked results to return, from 1 to 100.",
           "type": "integer",
           "minimum": 1,
           "maximum": 100
         },
         "tbs": {
+          "description": "Search time/result filter using Firecrawl search syntax, for example qdr:d for the past day.",
           "type": "string"
         },
         "filter": {
+          "description": "Additional search filter expression supported by the Firecrawl search API.",
           "type": "string"
         },
         "location": {
+          "description": "Geographic search location, such as a city, region, or country name.",
           "type": "string"
         },
         "includeDomains": {
@@ -7987,6 +8296,7 @@
           }
         },
         "enterprise": {
+          "description": "Enterprise privacy/search modes. Use `zdr` for zero-data-retention routing or `anon` for anonymous enterprise search when enabled.",
           "type": "array",
           "items": {
             "type": "string",
