@@ -942,7 +942,7 @@ export function createFirecrawlMcpServer(
   }
 
   const scrapeParamsSchema = z.object({
-    url: z.string().url(),
+    url: z.string().url().describe('Page URL to scrape.'),
     formats: z
       .array(
         z.enum([
@@ -960,37 +960,42 @@ export function createFirecrawlMcpServer(
           'audio',
         ])
       )
-      .optional(),
+      .optional()
+      .describe('Content formats to return. Defaults to markdown. Use `json` with jsonOptions, `query` with queryOptions, and `screenshot` with screenshotOptions.'),
     jsonOptions: z
       .object({
-        prompt: z.string().optional(),
-        schema: z.record(z.string(), z.any()).optional(),
+        prompt: z.string().optional().describe('Instruction for structured extraction when formats includes `json`.'),
+        schema: z.record(z.string(), z.any()).optional().describe('JSON Schema object describing the structured output to extract.'),
       })
-      .optional(),
+      .optional()
+      .describe('Structured extraction options used when formats includes `json`.'),
     queryOptions: z
       .object({
-        prompt: z.string().max(10000),
-        mode: z.enum(['directQuote', 'freeform']).default('freeform'),
+        prompt: z.string().max(10000).describe('Question or extraction instruction used when formats includes `query`.'),
+        mode: z.enum(['directQuote', 'freeform']).default('freeform').describe('Answer style: `directQuote` returns source text; `freeform` returns a synthesized answer.'),
       })
-      .optional(),
+      .optional()
+      .describe('Targeted-answer options used when formats includes `query`.'),
     screenshotOptions: z
       .object({
-        fullPage: z.boolean().optional(),
-        quality: z.number().optional(),
-        viewport: z.object({ width: z.number(), height: z.number() }).optional(),
+        fullPage: z.boolean().optional().describe('Capture the full scrollable page instead of only the viewport.'),
+        quality: z.number().optional().describe('Screenshot image quality when supported by the selected format.'),
+        viewport: z.object({ width: z.number(), height: z.number() }).optional().describe('Viewport dimensions in CSS pixels, for example {width: 1440, height: 900}.'),
       })
-      .optional(),
-    parsers: z.array(z.enum(['pdf'])).optional(),
+      .optional()
+      .describe('Screenshot options used when formats includes `screenshot`.'),
+    parsers: z.array(z.enum(['pdf'])).optional().describe('Additional document parsers to enable; currently supports `pdf`.'),
     pdfOptions: z
       .object({
-        maxPages: z.number().int().min(1).max(10000).optional(),
+        maxPages: z.number().int().min(1).max(10000).optional().describe('Maximum PDF pages to parse, from 1 to 10000.'),
       })
-      .optional(),
-    onlyMainContent: z.boolean().optional(),
-    redactPII: z.boolean().optional(),
-    includeTags: z.array(z.string()).optional(),
-    excludeTags: z.array(z.string()).optional(),
-    waitFor: z.number().optional(),
+      .optional()
+      .describe('PDF parser options used when parsers includes `pdf`.'),
+    onlyMainContent: z.boolean().optional().describe('Keep the primary page content and omit common navigation, footer, and boilerplate when possible.'),
+    redactPII: z.boolean().optional().describe('Redact personally identifiable information from returned content when supported.'),
+    includeTags: z.array(z.string()).optional().describe('Only include content matching these HTML tags or CSS selectors.'),
+    excludeTags: z.array(z.string()).optional().describe('Exclude content matching these HTML tags or CSS selectors.'),
+    waitFor: z.number().optional().describe('Milliseconds to wait after page load before extraction.'),
     ...(SAFE_MODE
       ? {}
       : {
@@ -1007,28 +1012,31 @@ export function createFirecrawlMcpServer(
                 fullPage: z.boolean().optional(),
               })
             )
-            .optional(),
+            .optional()
+            .describe('Browser actions to run before extraction; unavailable in safe mode.'),
         }),
-    mobile: z.boolean().optional(),
-    skipTlsVerification: z.boolean().optional(),
-    removeBase64Images: z.boolean().optional(),
+    mobile: z.boolean().optional().describe('Use a mobile device profile for rendering.'),
+    skipTlsVerification: z.boolean().optional().describe('Skip TLS certificate verification for the target page.'),
+    removeBase64Images: z.boolean().optional().describe('Remove inline base64-encoded images from returned content.'),
     location: z
       .object({
-        country: z.string().optional(),
-        languages: z.array(z.string()).optional(),
+        country: z.string().optional().describe('Two-letter country code used for geolocated browsing.'),
+        languages: z.array(z.string()).optional().describe('Preferred browser languages, for example [`en-US`, `es`].'),
       })
-      .optional(),
-    storeInCache: z.boolean().optional(),
-    zeroDataRetention: z.boolean().optional(),
-    maxAge: z.number().optional(),
-    lockdown: z.boolean().optional(),
-    proxy: z.enum(['basic', 'stealth', 'enhanced', 'auto']).optional(),
+      .optional()
+      .describe('Geographic and language settings for the scrape browser.'),
+    storeInCache: z.boolean().optional().describe('Allow this scrape result to be stored in Firecrawl cache.'),
+    zeroDataRetention: z.boolean().optional().describe('Request zero-data-retention handling when supported by the account and endpoint.'),
+    maxAge: z.number().optional().describe('Maximum cached-result age in milliseconds. Set 0 to force a live fetch.'),
+    lockdown: z.boolean().optional().describe('Restrict browsing behavior for a more isolated scrape when supported.'),
+    proxy: z.enum(['basic', 'stealth', 'enhanced', 'auto']).optional().describe('Proxy mode for the scrape. `auto` lets Firecrawl choose; `stealth` or `enhanced` may help on harder sites.'),
     profile: z
       .object({
-        name: z.string(),
-        saveChanges: z.boolean().optional(),
+        name: z.string().describe('Saved browser profile name to load.'),
+        saveChanges: z.boolean().optional().describe('Persist browser-profile changes made during this scrape.'),
       })
-      .optional(),
+      .optional()
+      .describe('Saved browser profile to load for this scrape.'),
   });
 
   // In safe mode firecrawl_scrape and firecrawl_search are read-only, so a named
@@ -1056,7 +1064,7 @@ export function createFirecrawlMcpServer(
   const scrapeToolParamsSchema = scrapeParamsSchema
     .extend({
       ...(SAFE_MODE ? { profile: readOnlyProfileSchema.optional() } : {}),
-      url: z.string().url().optional(),
+      url: z.string().url().optional().describe('Page URL to scrape in URL mode; mutually exclusive with alexandria.'),
       timeout: z.number().int().positive().optional().describe("Execution timeout in milliseconds."),
       requestId: z
         .string()
